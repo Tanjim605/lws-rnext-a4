@@ -1,4 +1,8 @@
-export default function AdvanceSearch() {
+export default function AdvanceSearch({
+  setHeight,
+  setWidth,
+  setModel,
+}) {
   return (
     <div className="border border-zinc-700/70 mb-6 rounded-lg p-4">
       <div className="flex items-center justify-between mb-4">
@@ -8,16 +12,18 @@ export default function AdvanceSearch() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div>
           <label
-            for="model"
+            htmlFor="model"
             className="block text-sm font-medium text-zinc-700 mb-1"
           >
             Model
           </label>
           <select
+            onChange={() => setModel(event.target.value)}
             id="model"
             className="w-full px-3 py-2 bg-zinc-900/10 border border-zinc-700/70 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
           >
-            <option className="bg-zinc-900" value="flux" selected>
+            {/* selected attribute is removed because of console error from react */}
+            <option className="bg-zinc-900" value="flux">
               Flux
             </option>
             <option className="bg-zinc-900" value="turbo">
@@ -28,7 +34,7 @@ export default function AdvanceSearch() {
 
         <div>
           <label
-            for="seed"
+            htmlFor="seed"
             className="block text-sm font-medium text-zinc-700 mb-1"
           >
             Seed (for reproducible results)
@@ -36,7 +42,7 @@ export default function AdvanceSearch() {
           <input
             type="number"
             id="seed"
-            disabled="true"
+            disabled={true}
             className="w-full bg-zinc-900/10 px-3 py-2 border border-zinc-700/70 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
             placeholder="Random"
           />
@@ -44,30 +50,32 @@ export default function AdvanceSearch() {
 
         <div>
           <label
-            for="width"
+            htmlFor="width"
             className="block text-sm font-medium text-zinc-700 mb-1"
           >
             Width
           </label>
           <input
+            onChange={() => setWidth(event.target.value)}
             type="number"
             id="width"
-            value="1024"
+            defaultValue="1024"
             className="w-full bg-zinc-900/10 px-3 py-2 border border-zinc-700/70 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
           />
         </div>
 
         <div>
           <label
-            for="height"
+            htmlFor="height"
             className="block text-sm font-medium text-zinc-700 mb-1"
           >
             Height
           </label>
           <input
+            onChange={() => setHeight(event.target.value)}
             type="number"
             id="height"
-            value="1024"
+            defaultValue="1024"
             className="w-full bg-zinc-900/10 px-3 py-2 border border-zinc-700/70 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
           />
         </div>
