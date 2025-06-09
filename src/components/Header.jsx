@@ -1,4 +1,4 @@
-export default function Header({ setRoute }) {
+export default function Header({active, setRoute }) {
   function handleClick(e) {
     setRoute(e.target.value);
   }
@@ -12,14 +12,14 @@ export default function Header({ setRoute }) {
         <button
           onClick={handleClick}
           value="create"
-          className="hover:text-zinc-200 font-medium text-zinc-200 cursor-pointer transition-all"
+          className={`${active=="create"?" font-medium text-zinc-200":""} hover:text-zinc-200 cursor-pointer transition-all`}
         >
           Create Image
         </button>
         <button
           onClick={handleClick}
           value="download"
-          className="hover:text-zinc-200 cursor-pointer transition-all"
+          className={`${active=="download"?" font-medium text-zinc-200":""} hover:text-zinc-200 cursor-pointer transition-all`}
         >
           Downloaded
         </button>

@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
-      <Header setRoute={setRoute} />
+      <Header active={route} setRoute={setRoute} />
       <Glow />
       <main className="relative z-10">
         {route === "create" ? <CreateImagePage /> : <DownloadPage />}
