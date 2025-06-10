@@ -1,9 +1,17 @@
-export default function AdvanceSearch({
-  setHeight,
-  setWidth,
-  setModel,
-  setGeneratedImageUrl,
-}) {
+import { useContext } from "react";
+import { promptContext } from "../context/index";
+
+export default function AdvanceSearch() {
+  const {
+    height,
+    setHeight,
+    width,
+    setWidth,
+    setModel,
+    setGeneratedImageUrl,
+    selectedRatio,
+    setSelectedRatio,
+  } = useContext(promptContext);
   return (
     <div className="border border-zinc-700/70 mb-6 rounded-lg p-4">
       <div className="flex items-center justify-between mb-4">
@@ -60,11 +68,11 @@ export default function AdvanceSearch({
           </label>
           <input
             onChange={() => {
-              setWidth(event.target.value), setGeneratedImageUrl("");
+              setWidth(event.target.value), setGeneratedImageUrl(""),setSelectedRatio(null);
             }}
             type="number"
             id="width"
-            defaultValue="1024"
+            value={width}
             className="w-full bg-zinc-900/10 px-3 py-2 border border-zinc-700/70 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
           />
         </div>
@@ -78,11 +86,11 @@ export default function AdvanceSearch({
           </label>
           <input
             onChange={() => {
-              setHeight(event.target.value), setGeneratedImageUrl("");
+              setHeight(event.target.value), setGeneratedImageUrl(""),setSelectedRatio(null);
             }}
             type="number"
             id="height"
-            defaultValue="1024"
+            value={height}
             className="w-full bg-zinc-900/10 px-3 py-2 border border-zinc-700/70 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
           />
         </div>
@@ -93,18 +101,43 @@ export default function AdvanceSearch({
           </label>
           <div className="flex flex-wrap gap-2">
             <button
-              onClick={() => {setHeight(1024)}}
-              className="bg-zinc-900/10  px-3 py-3 text-xs  hover:bg-zinc-800 rounded transition-colors"
+              onClick={() => {
+                setHeight(1024), setWidth(1024), setSelectedRatio("1:1");
+              }}
+              className={`${
+                selectedRatio == "1:1" ? "bg-zinc-800" : "bg-zinc-900/10"
+              }   px-3 py-3 text-xs  hover:bg-zinc-800 rounded transition-colors`}
             >
               1:1
             </button>
-            <button className="bg-zinc-900/10  px-3 py-3 text-xs  hover:bg-zinc-800 rounded transition-colors">
+            <button
+              onClick={() => {
+                setHeight(576), setWidth(1024), setSelectedRatio("16:9");
+              }}
+              className={`${
+                selectedRatio == "16:9" ? "bg-zinc-800" : "bg-zinc-900/10"
+              }   px-3 py-3 text-xs  hover:bg-zinc-800 rounded transition-colors`}
+            >
               16:9
             </button>
-            <button className="bg-zinc-900/10  px-3 py-3 text-xs  hover:bg-zinc-800 rounded transition-colors">
+            <button
+              onClick={() => {
+                setHeight(768), setWidth(1024), setSelectedRatio("4:3");
+              }}
+              className={`${
+                selectedRatio == "4:3" ? "bg-zinc-800" : "bg-zinc-900/10"
+              }   px-3 py-3 text-xs  hover:bg-zinc-800 rounded transition-colors`}
+            >
               4:3
             </button>
-            <button className="bg-zinc-900/10  px-3 py-3 text-xs  hover:bg-zinc-800 rounded transition-colors">
+            <button
+              onClick={() => {
+                setHeight(683), setWidth(1024), setSelectedRatio("3:2");
+              }}
+              className={`${
+                selectedRatio == "3:2" ? "bg-zinc-800" : "bg-zinc-900/10"
+              }   px-3 py-3 text-xs  hover:bg-zinc-800 rounded transition-colors`}
+            >
               3:2
             </button>
           </div>

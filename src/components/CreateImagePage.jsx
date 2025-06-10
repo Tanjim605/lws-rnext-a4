@@ -11,6 +11,7 @@ export default function CreateImagePage() {
   const [model, setModel] = useState("Flux");
   const [height, setHeight] = useState(1024);
   const [width, setWidth] = useState(1024);
+  const [selectedRatio, setSelectedRatio] = useState(null);
   const [generatedImageUrl, setGeneratedImageUrl] = useState("");
 
   let baseUrl = "https://image.pollinations.ai/prompt/";
@@ -25,15 +26,21 @@ export default function CreateImagePage() {
     <>
       <Heading text="Let's create a masterpiece, Alvian! " />
       <promptContext.Provider
-        value={{ prompt, setPrompt, width, height, model, setGeneratedImageUrl }}
+        value={{
+          prompt,
+          setPrompt,
+          width,
+          setWidth,
+          height,
+          setHeight,
+          selectedRatio,
+          setSelectedRatio,
+          model,
+          setGeneratedImageUrl,
+        }}
       >
         <SearchInput handleSend={handleSend} />
-        <AdvanceSearch
-          setHeight={setHeight}
-          setWidth={setWidth}
-          setModel={setModel}
-          setGeneratedImageUrl={setGeneratedImageUrl}
-        />
+        <AdvanceSearch />
 
         {generatedImageUrl ? <Results url={generatedImageUrl} /> : ""}
       </promptContext.Provider>
