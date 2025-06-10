@@ -68,7 +68,9 @@ export default function AdvanceSearch() {
           </label>
           <input
             onChange={() => {
-              setWidth(event.target.value), setGeneratedImageUrl(""),setSelectedRatio(null);
+              setWidth(event.target.value),
+                setGeneratedImageUrl(""),
+                setSelectedRatio(null);
             }}
             type="number"
             id="width"
@@ -86,7 +88,9 @@ export default function AdvanceSearch() {
           </label>
           <input
             onChange={() => {
-              setHeight(event.target.value), setGeneratedImageUrl(""),setSelectedRatio(null);
+              setHeight(event.target.value),
+                setGeneratedImageUrl(""),
+                setSelectedRatio(null);
             }}
             type="number"
             id="height"

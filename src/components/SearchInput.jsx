@@ -20,7 +20,9 @@ export default function SearchInput({ handleSend }) {
         <input
           type="text"
           value={prompt}
-          onChange={() => {setPrompt(event.target.value),setGeneratedImageUrl("")}}
+          onChange={() => {
+            setPrompt(event.target.value), setGeneratedImageUrl("");
+          }}
           onKeyDown={() => handleKeyDown(event)}
           placeholder="Create with Prompts"
           className="outline-none w-full py-4 px-2 bg-transparent text-white placeholder-zinc-400 text-lg"

@@ -36,6 +36,7 @@ export default function CreateImagePage() {
           selectedRatio,
           setSelectedRatio,
           model,
+          setModel,
           setGeneratedImageUrl,
         }}
       >

@@ -1,10 +1,12 @@
 import { useContext } from "react";
-import { promptContext } from "../context/index";
+import { downloadedContext, promptContext } from "../context/index";
 
 import DownloadIconSvg from "./SVG/DownloadIconSvg";
 
 export default function ResultImageCard({ src }) {
   const { prompt, width, height, model } = useContext(promptContext);
+  const { downloaded, setDownloaded } = useContext(downloadedContext);
+
   let parameter = "",
     downloadUrl = "";
 
@@ -43,6 +45,7 @@ export default function ResultImageCard({ src }) {
 
   function handleDownload() {
     if (downloadUrl) {
+      setDownloaded([src, ...downloaded]);
       const link = document.createElement("a");
       link.setAttribute("download", "generatedImage.png");
       link.href = downloadUrl;
