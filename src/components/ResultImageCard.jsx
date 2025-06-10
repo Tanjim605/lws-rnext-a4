@@ -25,27 +25,35 @@ export default function ResultImageCard({ src }) {
   src = encodeURI(src + parameter);
   console.log(src);
 
-  fetch(src)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to fetch image");
-      }
-      return response.blob();
-    })
-    .then((blob) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        downloadUrl = reader.result; // Store the base64 data URL
-      };
-      reader.readAsDataURL(blob);
-    })
-    .catch((err) => {
-      console.error("Error fetching or processing the image:", err.message);
-    });
+  try {
+    fetch(src)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch image");
+        }
+        return response.blob();
+      })
+      .then((blob) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          downloadUrl = reader.result; // Store the base64 data URL
+        };
+        reader.readAsDataURL(blob);
+      })
+      .catch((err) => {
+        console.error("Error fetching or processing the image:", err.message);
+      });
+  } catch (error) {
+    console.error("Error fetching or processing the image:", error);
+  }
 
   function handleDownload() {
     if (downloadUrl) {
-      downloadedRef.current = [src, ...downloadedRef.current];
+      const notUnique = [src, ...downloadedRef.current];
+      downloadedRef.current = [...new Set(notUnique)];
+
+      // console.log(`not unique  ${notUnique} unique ${downloadedRef.current}`);
+      
       const link = document.createElement("a");
       link.setAttribute("download", "generatedImage.png");
       link.href = downloadUrl;

@@ -24,7 +24,7 @@ export default function AdvanceSearch() {
         const modelsList = await response.json();
         setModels(modelsList);
         // models.current = modelsList;
-        console.log(modelsList);
+        // console.log(modelsList);
 
         // Set default model (e.g., first model or a fallback)
         // setSelectedModel(modelsList[0] || "flux");
@@ -138,7 +138,7 @@ export default function AdvanceSearch() {
                 setHeight(1024), setWidth(1024), setSelectedRatio("1:1");
               }}
               className={`${
-                selectedRatio == "1:1" ? "bg-zinc-800" : "bg-zinc-900/10"
+                selectedRatio == "1:1" ? "bg-zinc-800 outline-1 outline-violet-400" : "bg-zinc-900/10"
               }   px-3 py-3 text-xs  hover:bg-zinc-800 rounded transition-colors`}
             >
               1:1
@@ -148,7 +148,7 @@ export default function AdvanceSearch() {
                 setHeight(576), setWidth(1024), setSelectedRatio("16:9");
               }}
               className={`${
-                selectedRatio == "16:9" ? "bg-zinc-800" : "bg-zinc-900/10"
+                selectedRatio == "16:9" ? "bg-zinc-800 outline-1 outline-violet-400" : "bg-zinc-900/10"
               }   px-3 py-3 text-xs  hover:bg-zinc-800 rounded transition-colors`}
             >
               16:9
@@ -158,7 +158,7 @@ export default function AdvanceSearch() {
                 setHeight(768), setWidth(1024), setSelectedRatio("4:3");
               }}
               className={`${
-                selectedRatio == "4:3" ? "bg-zinc-800" : "bg-zinc-900/10"
+                selectedRatio == "4:3" ? "bg-zinc-800 outline-1 outline-violet-400" : "bg-zinc-900/10"
               }   px-3 py-3 text-xs  hover:bg-zinc-800 rounded transition-colors`}
             >
               4:3
@@ -168,7 +168,7 @@ export default function AdvanceSearch() {
                 setHeight(683), setWidth(1024), setSelectedRatio("3:2");
               }}
               className={`${
-                selectedRatio == "3:2" ? "bg-zinc-800" : "bg-zinc-900/10"
+                selectedRatio == "3:2" ? "bg-zinc-800 outline-1 outline-violet-400" : "bg-zinc-900/10"
               }   px-3 py-3 text-xs  hover:bg-zinc-800 rounded transition-colors`}
             >
               3:2
