@@ -50,6 +50,7 @@ export default function ResultImageCard({ src }) {
   function handleDownload() {
     if (downloadUrl) {
       const notUnique = [src, ...downloadedRef.current];
+      // I am using a set to keep the unique values from the array
       downloadedRef.current = [...new Set(notUnique)];
 
       // console.log(`not unique  ${notUnique} unique ${downloadedRef.current}`);
