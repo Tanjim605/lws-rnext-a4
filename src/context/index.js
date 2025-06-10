@@ -1,7 +1,7 @@
 import { createContext } from "react"
 
-const promptContext = createContext("")
-const downloadedContext = createContext("")
+const PromptContext = createContext("")
+const DownloadedContext = createContext("")
 
-export { downloadedContext, promptContext }
+export { DownloadedContext, PromptContext }
 

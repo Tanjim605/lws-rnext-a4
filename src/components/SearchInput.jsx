@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { promptContext } from "../context/index";
+import { PromptContext } from "../context/index";
 
 import SearchIconSvg from "./SVG/SearchIconSvg";
 import SendIconSvg from "./SVG/SendIconSvg";
 
 export default function SearchInput({ handleSend }) {
-  const { prompt, setPrompt, setGeneratedImageUrl } = useContext(promptContext);
+  const { prompt, setPrompt, setGeneratedImageUrl } = useContext(PromptContext);
 
   function handleKeyDown(event) {
     if (event.key == "Enter") handleSend(event);

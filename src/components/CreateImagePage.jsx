@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { promptContext } from "../context";
+import { PromptContext } from "../context";
 import AdvanceSearch from "./AdvanceSearch";
 import Heading from "./Heading";
 import Results from "./Results";
@@ -25,7 +25,7 @@ export default function CreateImagePage() {
   return (
     <>
       <Heading text="Let's create a masterpiece, Alvian! " />
-      <promptContext.Provider
+      <PromptContext.Provider
         value={{
           prompt,
           setPrompt,
@@ -44,7 +44,7 @@ export default function CreateImagePage() {
         <AdvanceSearch />
 
         {generatedImageUrl ? <Results url={generatedImageUrl} /> : ""}
-      </promptContext.Provider>
+      </PromptContext.Provider>
     </>
   );
 }

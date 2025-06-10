@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { downloadedContext, promptContext } from "../context/index";
+import { DownloadedContext, PromptContext } from "../context/index";
 
 import DownloadIconSvg from "./SVG/DownloadIconSvg";
 
 export default function ResultImageCard({ src }) {
-  const { prompt, width, height, model } = useContext(promptContext);
-  const { downloadedRef } = useContext(downloadedContext);
+  const { prompt, width, height, model } = useContext(PromptContext);
+  const { downloadedRef } = useContext(DownloadedContext);
 
   let parameter = "",
     downloadUrl = "";

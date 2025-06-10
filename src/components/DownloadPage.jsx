@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { downloadedContext } from "../context";
+import { DownloadedContext } from "../context";
 import DownloadImageCard from "./DownloadImageCard";
 import Heading from "./Heading";
 
 export default function CreateImagePage() {
-  const { downloadedRef } = useContext(downloadedContext);
+  const { downloadedRef } = useContext(DownloadedContext);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { promptContext } from "../context/index";
+import { PromptContext } from "../context/index";
 
 export default function AdvanceSearch() {
   const {
@@ -11,7 +11,7 @@ export default function AdvanceSearch() {
     setGeneratedImageUrl,
     selectedRatio,
     setSelectedRatio,
-  } = useContext(promptContext);
+  } = useContext(PromptContext);
   const [models, setModels] = useState([]);
 
   useEffect(() => {
