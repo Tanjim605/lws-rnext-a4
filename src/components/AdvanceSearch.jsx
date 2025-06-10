@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { promptContext } from "../context/index";
 
 export default function AdvanceSearch() {
@@ -12,6 +12,30 @@ export default function AdvanceSearch() {
     selectedRatio,
     setSelectedRatio,
   } = useContext(promptContext);
+  const [models, setModels] = useState([]);
+
+  useEffect(() => {
+    const fetchModels = async () => {
+      try {
+        const response = await fetch("https://image.pollinations.ai/models");
+        if (!response.ok) {
+          throw new Error("Failed to fetch models");
+        }
+        const modelsList = await response.json();
+        setModels(modelsList);
+        // models.current = modelsList;
+        console.log(modelsList);
+
+        // Set default model (e.g., first model or a fallback)
+        // setSelectedModel(modelsList[0] || "flux");
+      } catch (err) {
+        console.error("Error fetching models:", err);
+      }
+    };
+
+    fetchModels();
+  }, []);
+
   return (
     <div className="border border-zinc-700/70 mb-6 rounded-lg p-4">
       <div className="flex items-center justify-between mb-4">
@@ -34,12 +58,17 @@ export default function AdvanceSearch() {
             className="w-full px-3 py-2 bg-zinc-900/10 border border-zinc-700/70 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
           >
             {/* selected attribute is removed because of console error from react */}
-            <option className="bg-zinc-900" value="flux">
-              Flux
-            </option>
-            <option className="bg-zinc-900" value="turbo">
-              Turbo
-            </option>
+            {models.length > 0 ? (
+              models.map((model, idx) => (
+                <option className="bg-zinc-900" key={idx} value={model}>
+                  {model}
+                </option>
+              ))
+            ) : (
+              <option key="1" value="">
+                Loading models...
+              </option>
+            )}
           </select>
         </div>
 

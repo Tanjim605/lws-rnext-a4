@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./App.css";
 
 import CreateImagePage from "./components/CreateImagePage";
@@ -9,16 +9,16 @@ import { downloadedContext } from "./context";
 
 function App() {
   const [route, setRoute] = useState("create");
-  const [downloaded, setDownloaded] = useState([]);
+  const downloadedRef = useRef([])
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       <Header active={route} setRoute={setRoute} />
       <Glow />
-      <downloadedContext.Provider value={{ downloaded, setDownloaded }}>
+      <downloadedContext.Provider value={{ downloadedRef  }}>
         <main className="relative z-10">
           {route === "create" ? <CreateImagePage /> : <DownloadPage />}
-          {console.log(downloaded)}
+          {/* {console.log(downloadedRef.current)} */}
         </main>
       </downloadedContext.Provider>
     </div>

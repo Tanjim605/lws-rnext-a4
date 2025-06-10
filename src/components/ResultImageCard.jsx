@@ -5,7 +5,7 @@ import DownloadIconSvg from "./SVG/DownloadIconSvg";
 
 export default function ResultImageCard({ src }) {
   const { prompt, width, height, model } = useContext(promptContext);
-  const { downloaded, setDownloaded } = useContext(downloadedContext);
+  const { downloadedRef } = useContext(downloadedContext);
 
   let parameter = "",
     downloadUrl = "";
@@ -45,7 +45,7 @@ export default function ResultImageCard({ src }) {
 
   function handleDownload() {
     if (downloadUrl) {
-      setDownloaded([src, ...downloaded]);
+      downloadedRef.current = [src, ...downloadedRef.current];
       const link = document.createElement("a");
       link.setAttribute("download", "generatedImage.png");
       link.href = downloadUrl;
