@@ -5,7 +5,7 @@ import SearchIconSvg from "./SVG/SearchIconSvg";
 import SendIconSvg from "./SVG/SendIconSvg";
 
 export default function SearchInput({ handleSend }) {
-  const { prompt, setPrompt } = useContext(promptContext);
+  const { prompt, setPrompt, setGeneratedImageUrl } = useContext(promptContext);
 
   function handleKeyDown(event) {
     if (event.key == "Enter") handleSend(event);
@@ -20,7 +20,7 @@ export default function SearchInput({ handleSend }) {
         <input
           type="text"
           value={prompt}
-          onChange={() => setPrompt(event.target.value)}
+          onChange={() => {setPrompt(event.target.value),setGeneratedImageUrl("")}}
           onKeyDown={() => handleKeyDown(event)}
           placeholder="Create with Prompts"
           className="outline-none w-full py-4 px-2 bg-transparent text-white placeholder-zinc-400 text-lg"

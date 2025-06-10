@@ -25,13 +25,14 @@ export default function CreateImagePage() {
     <>
       <Heading text="Let's create a masterpiece, Alvian! " />
       <promptContext.Provider
-        value={{ prompt, setPrompt, width, height, model }}
+        value={{ prompt, setPrompt, width, height, model, setGeneratedImageUrl }}
       >
         <SearchInput handleSend={handleSend} />
         <AdvanceSearch
           setHeight={setHeight}
           setWidth={setWidth}
           setModel={setModel}
+          setGeneratedImageUrl={setGeneratedImageUrl}
         />
 
         {generatedImageUrl ? <Results url={generatedImageUrl} /> : ""}
