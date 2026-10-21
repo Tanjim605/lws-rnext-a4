@@ -130,7 +130,7 @@ export default function ResultImageCard({
   }
 
   return (
-    <div className="image-card rounded-xl overflow-hidden cursor-pointer relative">
+    <div className="image-card rounded-xl overflow-hidden relative">
       {isImageLoading ? (
         <div
           className="flex w-full flex-col items-center justify-center gap-3 bg-gray-700 px-6"
@@ -185,7 +185,7 @@ export default function ResultImageCard({
         </div>
       ) : (
         <>
-          <div className="absolute bottom-2 right-2  p-1 ">
+          <div className="absolute bottom-2 cursor-pointer right-2  p-1 ">
             <button onClick={handleDownload}>
               <DownloadIconSvg />
             </button>
