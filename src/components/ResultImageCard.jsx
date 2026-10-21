@@ -148,7 +148,34 @@ export default function ResultImageCard({
           </div>
         </div>
       ) : isError ? (
-        <p className="text-center align-middle  w-full h-48 bg-gray-700 font-semibold text-red-400">Error: {isError}</p>
+        <div className="flex h-48 w-full flex-col items-center justify-center gap-2 bg-linear-to-br from-red-950/70 via-gray-800 to-gray-900 px-5 text-center">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full border border-red-400/30 bg-red-400/10 text-red-300">
+            <svg
+              aria-hidden="true"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="1.8"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 9v3.75m0 3.75h.008M10.3 3.9 2.85 17a2 2 0 0 0 1.74 3h14.82a2 2 0 0 0 1.74-3L13.7 3.9a2 2 0 0 0-3.4 0Z"
+              />
+            </svg>
+          </div>
+          <p className="font-semibold text-red-200">Image generation failed</p>
+          <p className="max-w-xs text-xs leading-4 text-gray-300">
+            We couldn&apos;t create this image. Please try generating it again.
+          </p>
+          <span className="mt-1 rounded-full border border-white/10 bg-black/20 px-2.5 py-1 text-[11px] text-gray-400">
+            Seed {seed}
+          </span>
+          <p className="max-w-xs truncate text-[10px] text-red-300/60" title={isError}>
+            {isError}
+          </p>
+        </div>
       ) : (
         <>
           <div className="absolute bottom-2 right-2  p-1 ">
