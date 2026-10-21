@@ -13,6 +13,7 @@ export default function ResultImageCard({
   model,
 }) {
   const { downloadedRef } = useContext(DownloadedContext);
+  const imageAspectRatio = `${width} / ${height}`;
 
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [isWaiting, setIsWaiting] = useState(requestDelay > 0);
@@ -131,7 +132,10 @@ export default function ResultImageCard({
   return (
     <div className="image-card rounded-xl overflow-hidden cursor-pointer relative">
       {isImageLoading ? (
-        <div className="flex h-48 w-full flex-col items-center justify-center gap-3 bg-gray-700 px-6">
+        <div
+          className="flex w-full flex-col items-center justify-center gap-3 bg-gray-700 px-6"
+          style={{ aspectRatio: imageAspectRatio }}
+        >
           <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-500 border-t-blue-400" />
           <p className="font-semibold text-blue-300">
             {isWaiting
@@ -148,7 +152,10 @@ export default function ResultImageCard({
           </div>
         </div>
       ) : isError ? (
-        <div className="flex h-48 w-full flex-col items-center justify-center gap-2 bg-linear-to-br from-red-950/70 via-gray-800 to-gray-900 px-5 text-center">
+        <div
+          className="flex w-full flex-col items-center justify-center gap-2 bg-linear-to-br from-red-950/70 via-gray-800 to-gray-900 px-5 text-center"
+          style={{ aspectRatio: imageAspectRatio }}
+        >
           <div className="flex h-11 w-11 items-center justify-center rounded-full border border-red-400/30 bg-red-400/10 text-red-300">
             <svg
               aria-hidden="true"
@@ -187,6 +194,7 @@ export default function ResultImageCard({
             src={imageSource.current}
             alt={prompt}
             className="w-full object-cover"
+            style={{ aspectRatio: imageAspectRatio }}
           />
         </>
       )}
