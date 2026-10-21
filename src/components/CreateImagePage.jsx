@@ -24,7 +24,7 @@ export default function CreateImagePage() {
 
   return (
     <>
-      <Heading text="Let's create a masterpiece, Alvian! " />
+      <Heading text="Let's create a masterpiece!" />
       <PromptContext.Provider
         value={{
           prompt,
