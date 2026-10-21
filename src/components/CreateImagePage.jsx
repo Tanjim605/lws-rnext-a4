@@ -13,6 +13,8 @@ export default function CreateImagePage() {
   const [width, setWidth] = useState(1024);
   const [selectedRatio, setSelectedRatio] = useState(null);
   const [generatedImageUrl, setGeneratedImageUrl] = useState("");
+  const [generationId, setGenerationId] = useState(0);
+  const [generationOptions, setGenerationOptions] = useState(null);
 
   let baseUrl = "https://image.pollinations.ai/prompt/";
   // let urlWithParameter = `https://image.pollinations.ai/prompt/{prompt}?width={width}&height={height}&seed=42&model={model}`;
@@ -20,6 +22,8 @@ export default function CreateImagePage() {
   function handleSend(e) {
     e.preventDefault();
     setGeneratedImageUrl(baseUrl);
+    setGenerationOptions({ prompt, width, height, model });
+    setGenerationId((currentId) => currentId + 1);
   }
 
   return (
@@ -43,7 +47,15 @@ export default function CreateImagePage() {
         <SearchInput handleSend={handleSend} />
         <AdvanceSearch />
 
-        {generatedImageUrl ? <Results url={generatedImageUrl} /> : ""}
+        {generatedImageUrl ? (
+          <Results
+            url={generatedImageUrl}
+            generationId={generationId}
+            generationOptions={generationOptions}
+          />
+        ) : (
+          ""
+        )}
       </PromptContext.Provider>
     </>
   );
