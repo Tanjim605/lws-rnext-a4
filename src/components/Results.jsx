@@ -2,7 +2,7 @@ import ResultImageCard from "./ResultImageCard";
 import { useMemo } from "react";
 
 const IMAGE_COUNT = 9;
-const REQUEST_INTERVAL_MS = 45_000;
+const REQUEST_INTERVAL_MS = 46_000;
 
 function createUniqueSeeds(count, salt = 0) {
   const seeds = new Set();
