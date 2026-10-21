@@ -15,6 +15,13 @@ export default function ResultImageCard({
   const { downloadedRef } = useContext(DownloadedContext);
 
   const [isImageLoading, setIsImageLoading] = useState(true);
+  const [isWaiting, setIsWaiting] = useState(requestDelay > 0);
+  const [loadingProgress, setLoadingProgress] = useState(
+    requestDelay > 0 ? 0 : 100
+  );
+  const [remainingSeconds, setRemainingSeconds] = useState(
+    Math.ceil(requestDelay / 1000)
+  );
   const [isError, setIsError] = useState(null);
 
   let imageSource = useRef(""),
@@ -23,10 +30,14 @@ export default function ResultImageCard({
   useEffect(() => {
     let parameter = "";
     let timeoutId;
+    let progressIntervalId;
     let reader;
     const controller = new AbortController();
 
     setIsImageLoading(true);
+    setIsWaiting(requestDelay > 0);
+    setLoadingProgress(requestDelay > 0 ? 0 : 100);
+    setRemainingSeconds(Math.ceil(requestDelay / 1000));
     setIsError(null);
     downloadUrl.current = "";
 
@@ -43,7 +54,26 @@ export default function ResultImageCard({
     const fetchImage = async () => {
       try {
         await new Promise((resolve) => {
-          timeoutId = setTimeout(resolve, requestDelay);
+          const startedAt = Date.now();
+
+          progressIntervalId = setInterval(() => {
+            const elapsed = Date.now() - startedAt;
+            const progress = Math.min(100, (elapsed / requestDelay) * 100);
+
+            if (requestDelay > 0) {
+              setLoadingProgress(progress);
+              setRemainingSeconds(
+                Math.max(0, Math.ceil((requestDelay - elapsed) / 1000))
+              );
+            }
+          }, 250);
+
+          timeoutId = setTimeout(() => {
+            clearInterval(progressIntervalId);
+            setIsWaiting(false);
+            setLoadingProgress(100);
+            resolve();
+          }, requestDelay);
         });
 
         const response = await fetch(imageSource.current, {
@@ -73,6 +103,7 @@ export default function ResultImageCard({
 
     return () => {
       clearTimeout(timeoutId);
+      clearInterval(progressIntervalId);
       controller.abort();
       if (reader?.readyState === FileReader.LOADING) {
         reader.abort();
@@ -100,7 +131,22 @@ export default function ResultImageCard({
   return (
     <div className="image-card rounded-xl overflow-hidden cursor-pointer relative">
       {isImageLoading ? (
-        <p className="text-center align-middle  w-full h-48 bg-gray-700 font-semibold text-blue-500">Loading image...</p>
+        <div className="flex h-48 w-full flex-col items-center justify-center gap-3 bg-gray-700 px-6">
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-500 border-t-blue-400" />
+          <p className="font-semibold text-blue-300">
+            {isWaiting
+              ? `Queued — starts in ${remainingSeconds}s`
+              : "Generating image..."}
+          </p>
+          <div className="h-2 w-full overflow-hidden rounded-full bg-gray-600">
+            <div
+              className={`h-full rounded-full bg-blue-400 transition-[width] duration-300 ${
+                isWaiting ? "" : "animate-pulse"
+              }`}
+              style={{ width: `${loadingProgress}%` }}
+            />
+          </div>
+        </div>
       ) : isError ? (
         <p className="text-center align-middle  w-full h-48 bg-gray-700 font-semibold text-red-400">Error: {isError}</p>
       ) : (
