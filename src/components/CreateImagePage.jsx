@@ -16,7 +16,7 @@ export default function CreateImagePage() {
   const [generationId, setGenerationId] = useState(0);
   const [generationOptions, setGenerationOptions] = useState(null);
 
-  let baseUrl = "https://image.pollinations.ai/prompt/";
+  let baseUrl = "https://image.pollinations.ai/image/";
   // let urlWithParameter = `https://image.pollinations.ai/prompt/{prompt}?width={width}&height={height}&seed=42&model={model}`;
 
   function handleSend(e) {
